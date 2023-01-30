@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-import 'utils.dart';
-
 class Classifier {
   late String vocabFile;
   late String modelFile;
