@@ -30,3 +30,4 @@ migrate_working_dir/
 build/
 .fvm/flutter_sdk
 *.flutter-plugins*
+*.plugin_symlinks*
