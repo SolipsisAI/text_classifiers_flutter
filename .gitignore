@@ -31,3 +31,6 @@ build/
 .fvm/flutter_sdk
 *.flutter-plugins*
 *.plugin_symlinks*
+Generated.xcconfig
+flutter_export_environment.sh
+ephemeral
