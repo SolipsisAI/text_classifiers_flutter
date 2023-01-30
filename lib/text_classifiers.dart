@@ -1,7 +1,5 @@
 library text_classifiers;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/classifier.dart' show Classifier;
+export 'src/emotion_classifier.dart' show EmotionClassifier;
+export 'src/sentiment_classifier.dart' show SentimentClassifier;
