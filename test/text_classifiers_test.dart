@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ml_linalg/vector.dart';
 import 'package:mockito/annotations.dart';
 import 'package:tflite_flutter/tflite_flutter.dart' as tflite_flutter;
 
@@ -9,5 +8,12 @@ import 'text_classifiers_test.mocks.dart';
 
 @GenerateMocks([tflite_flutter.Interpreter])
 void main() {
-  group('classifier io', (() {}));
+  TestWidgetsFlutterBinding.ensureInitialized();
+  group('classifier', (() {
+    test('loads model from assets', () async {
+      const vocabFile = 'vocab.txt';
+      const modelFile = 'model.tflite';
+      final classifier = Classifier(vocabFile, modelFile);
+    });
+  }));
 }
