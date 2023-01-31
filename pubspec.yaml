@@ -14,6 +14,7 @@ dependencies:
   path_provider: ^2.0.9
   tflite_flutter: ^0.9.0
   ml_linalg: ^13.11.20
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
