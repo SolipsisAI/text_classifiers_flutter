@@ -2,15 +2,20 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 
 import 'classifier.dart';
 
-const vocabFile = 'sentiment_classification.vocab.txt';
-const modelFile = 'sentiment_classification.tflite';
+const defaultVocabFile = 'assets://sentiment_classification.vocab.txt';
+const defaultModelFile = 'assets://sentiment_classification.tflite';
 const int sentenceLen = 256;
 const String start = '<START>';
 const String pad = '<PAD>';
 const String unk = '<UNKNOWN>';
 
 class SentimentClassifier extends Classifier {
-  SentimentClassifier() : super(vocabFile, modelFile);
+  String vocab;
+  String model;
+
+  SentimentClassifier(
+      {this.vocab = defaultVocabFile, this.model = defaultModelFile})
+      : super(vocab, model);
 
   Future<int> classify(String rawText) async {
     // tokenizeInputText returns List<List<double>>

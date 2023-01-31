@@ -2,8 +2,9 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 import 'classifier.dart';
 import 'util.dart';
 
-const vocabFile = 'emotion_classification.vocab.txt';
-const modelFile = 'emotion_classification.tflite';
+const defaultVocabFile = 'assets://emotion_classification.vocab.txt';
+const defaultModelFile = 'assets://emotion_classification.tflite';
+
 const int _sentenceLen = 256;
 const String start = '[CLS]';
 const String pad = '[PAD]';
@@ -11,6 +12,9 @@ const String unk = '[UNK]';
 const String sep = '[SEP]';
 
 class EmotionClassifier extends Classifier {
+  String vocab;
+  String model;
+
   final List<String> labels = [
     "sadness",
     "joy",
@@ -20,7 +24,9 @@ class EmotionClassifier extends Classifier {
     "surprise"
   ];
 
-  EmotionClassifier() : super(vocabFile, modelFile);
+  EmotionClassifier(
+      {this.model = defaultModelFile, this.vocab = defaultVocabFile})
+      : super(vocab, model);
 
   Future<String> classify(String rawText) async {
     // tokenizeInputText returns List<List<double>>

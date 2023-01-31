@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -16,7 +18,12 @@ class Classifier {
 
   void _loadModel() async {
     // Creating the interpreter using Interpreter.fromAsset
-    interpreter = await Interpreter.fromAsset('models/$modelFile');
+    if (modelFile.startsWith('assets://')) {
+      interpreter = await Interpreter.fromAsset('models/$modelFile');
+    } else {
+      final file = File(modelFile);
+      interpreter = Interpreter.fromFile(file);
+    }
     debugPrint('Interpreter $modelFile loaded successfully');
   }
 
