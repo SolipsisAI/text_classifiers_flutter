@@ -2,8 +2,8 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 
 import 'classifier.dart';
 
-const defaultVocabFile = 'assets://sentiment_classification.vocab.txt';
-const defaultModelFile = 'assets://sentiment_classification.tflite';
+const defaultVocabFile = 'sentiment_classification.vocab.txt';
+const defaultModelFile = 'sentiment_classification.tflite';
 const int sentenceLen = 256;
 const String start = '<START>';
 const String pad = '<PAD>';

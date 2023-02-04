@@ -2,8 +2,8 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 import 'classifier.dart';
 import 'util.dart';
 
-const defaultVocabFile = 'assets://emotion_classification.vocab.txt';
-const defaultModelFile = 'assets://emotion_classification.tflite';
+const defaultVocabFile = 'emotion_classification.vocab.txt';
+const defaultModelFile = 'emotion_classification.tflite';
 
 const int _sentenceLen = 256;
 const String start = '[CLS]';
