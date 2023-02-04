@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:ml_linalg/linalg.dart';
+import 'package:path_provider/path_provider.dart';
+
+const baseS3Url = 'https://solipsis-data.s3.us-east-2.amazonaws.com/models';
 
 Vector softmax(List<double> output) {
   // Compute the softmax
@@ -28,6 +31,24 @@ int argmax(Vector input) {
 
 String sanitizeString(String text) {
   return text.toLowerCase().replaceAll(RegExp('[^A-Za-z0-9]'), '');
+}
+
+Future<String> getModelsDir() async {
+  String appdirpath = (await getApplicationSupportDirectory()).path;
+  return '$appdirpath/models';
+}
+
+void downloadModel(String modelName) async {
+  final modelsDir = await getModelsDir();
+  Directory(modelsDir).create(recursive: true);
+
+  final modelUrl = '$baseS3Url/$modelName.tflite';
+  final modelPath = '$modelsDir/$modelName.tflite';
+  downloadFile(modelUrl, modelPath, 'bytes', modelsDir);
+
+  final vocabUrl = '$baseS3Url/$modelName.vocab.txt';
+  final vocabPath = '$modelsDir/$modelName.vocab.txt';
+  downloadFile(vocabUrl, vocabPath, 'string', modelsDir);
 }
 
 void downloadFile(
