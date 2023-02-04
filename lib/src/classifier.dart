@@ -20,21 +20,12 @@ class Classifier {
 
   void _loadModel() async {
     // Creating the interpreter using Interpreter.fromAsset
-    if (modelFile.startsWith('assets://')) {
-      interpreter = await Interpreter.fromAsset('models/$modelFile');
-    } else {
-      final file = File(modelFile);
-      interpreter = Interpreter.fromFile(file);
-    }
+    interpreter = await Interpreter.fromAsset('models/$modelFile');
     debugPrint('Interpreter $modelFile loaded successfully');
   }
 
   void _loadDictionary() async {
-    final vocabFilename = vocabFile.startsWith('assets://')
-        ? 'assets/models/$vocabFile'
-        : vocabFile;
-
-    final vocab = await rootBundle.loadString(vocabFilename);
+    final vocab = await rootBundle.loadString('assets/models/$vocabFile');
 
     var tempDict = <String, int>{};
     final vocabList = vocab.split('\n');
