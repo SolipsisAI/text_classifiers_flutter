@@ -26,6 +26,10 @@ int argmax(Vector input) {
   return index;
 }
 
+String sanitizeString(String text) {
+  return text.toLowerCase().replaceAll(RegExp('[^A-Za-z0-9]'), '');
+}
+
 void downloadFile(
     String? url, String? filename, String? type, String? downloaddir) async {
   String filepath = '$downloaddir/$filename';

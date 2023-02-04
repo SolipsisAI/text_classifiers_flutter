@@ -64,11 +64,11 @@ class EmotionClassifier extends Classifier {
       if (index > _sentenceLen) {
         break;
       }
-      var encoded = wordPiece(tok.toLowerCase());
+      var encoded = wordPiece(sanitizeString(tok));
       for (var word in encoded) {
-        vec[index++] = dict.containsKey(word.toLowerCase())
-            ? dict[word.toLowerCase()]!
-            : dict[unk]!;
+        var sanitizedWord = sanitizeString(word);
+        vec[index++] =
+            dict.containsKey(sanitizedWord) ? dict[sanitizedWord]! : dict[unk]!;
       }
     }
 

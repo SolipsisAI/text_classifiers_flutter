@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
+import 'util.dart';
+
 class Classifier {
   late String vocabFile;
   late String modelFile;
@@ -28,7 +30,12 @@ class Classifier {
   }
 
   void _loadDictionary() async {
-    final vocab = await rootBundle.loadString('assets/models/$vocabFile');
+    final vocabFilename = vocabFile.startsWith('assets://')
+        ? 'assets/models/$vocabFile'
+        : vocabFile;
+
+    final vocab = await rootBundle.loadString(vocabFilename);
+
     var tempDict = <String, int>{};
     final vocabList = vocab.split('\n');
     for (var i = 0; i < vocabList.length; i++) {
