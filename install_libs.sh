@@ -100,7 +100,7 @@ else
 fi
 
 if [[ "$INCLUDE_IOS" == 'True' || "$INCLUDE_IOS" == 'true' ]]; then
-    if [ ! -d "$PROJECT_DIR/ios/.symlinks/plugins/tflite_flutter/ios/TensorFlowLiteC.framework"]; then
+    if [ ! -d "$PROJECT_DIR/ios/.symlinks/plugins/tflite_flutter/ios/TensorFlowLiteC.framework" ]; then
         echo "[INFO] Building iOS dependencies"
         build_ios_binaries
     else
