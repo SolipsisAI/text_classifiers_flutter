@@ -7,7 +7,8 @@ TFLITE_IOS_DIR=$PROJECT_DIR/ios/.symlinks/plugins/tflite_flutter/ios
 BAZEL_VERSION=5.0.0
 TF_VERSION=2.9
 
-BAZEL_URL=https://github.com/bazelbuild/bazel/releases/download/$BAZEL_VERSION/bazel-$BAZEL_VERSION-installer-linux-x86_64.sh
+BAZEL_URL="https://github.com/bazelbuild/bazel/releases/download/$BAZEL_VERSION/bazel-$BAZEL_VERSION-installer-$unamestr-x86_64.sh"
+
 BASE_LIB_FILENAME="libtensorflowlite_c"
 
 setup_python () {
@@ -22,7 +23,7 @@ setup_bazel () {
   if ! command -v bazel &> /dev/null
   then
     echo "bazel-$BAZEL_VERSION not installed"
-    curl -L -o /tmp/bazel-installer.sh $BAZEL_URL
+    curl -f -L -o /tmp/bazel-installer.sh $BAZEL_URL
     chmod +x /tmp/bazel-installer.sh
     /tmp/bazel-installer.sh --user
   fi
@@ -81,15 +82,15 @@ copy_to_project () {
     cp $TF_DIR/bazel-bin/tensorflow/lite/c/$src_filename $BLOBS_DIR/$dest_filename
 }
 
-unamestr=$(uname)
-if [[ "$unamestr" == 'Linux' ]]; then
+unamestr=$(uname|tr '[:upper:]' '[:lower:]')
+if [[ "$unamestr" == 'linux' ]]; then
     echo "Setting up on Linux"
     src_filename="${BASE_LIB_FILENAME}.so"
     dest_filename="${BASE_LIB_FILENAME}-linux.so"
     BLOBS_DIR=${PROJECT_DIR}/blobs
     mkdir -p $BLOBS_DIR
     #setup_linux
-elif [[ "$unamestr" == 'Darwin' ]]; then
+elif [[ "$unamestr" == 'darwin' ]]; then
     echo "macos"
     src_filename="${BASE_LIB_FILENAME}.dylib"
     dest_filename="${BASE_LIB_FILENAME}-mac.so" # the tflite_flutter plugin looks for a *.so file
