@@ -11,29 +11,21 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Pre-requisites
 
-## Features
+- `bazel-5.0.0` to be installed by `install_libs.sh`
+- `python3` which can be set up by the `install_libs.sh` script.
+- `numpy` same as above
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Install dependencies
 
-## Getting started
+```shell
+# INSTALL LIBRARIES FOR DESKTOP
+bash ./install_libs.sh
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+# INSTALL LIBRARIES FOR IOS
+INCLUDE_IOS=true bash ./install_libs.sh
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+# Download model file and vocab text
+bash ./download_assets.sh
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
