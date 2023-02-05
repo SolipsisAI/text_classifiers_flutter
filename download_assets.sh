@@ -2,15 +2,19 @@
 TF_VERSION=2.5
 
 ASSETS_DIR="assets"
-MODEL_FILENAME="sentiment_classification.tflite"
-VOCAB_FILENAME="sentiment_classification_vocab.txt"
+MODELS_DIR="${ASSETS_DIR}/models"
+MODELS=("emotion_classifier" "sentiment_classifier")
 
-MODEL_URL="https://storage.googleapis.com/download.tensorflow.org/models/tflite/text_classification/${MODEL_FILENAME}"
-VOCAB_URL="https://raw.githubusercontent.com/am15h/tflite_flutter_plugin/master/example/assets/${VOCAB_FILENAME}"
+BASE_URL='https://solipsis-data.s3.us-east-2.amazonaws.com/models' 
 
 download () {
-    curl -o "${ASSETS_DIR}/$1" "$2"
+    curl -o "${MODELS_DIR}/$1" "$2"
 }
 
-download $MODEL_FILENAME $MODEL_URL
-download $VOCAB_FILENAME $VOCAB_URL
+mkdir -p $(pwd)/${MODELS_DIR}
+
+for i in "${MODELS[@]}"
+do
+    download "${i}.tflite" "${BASE_URL}/${i}.tflite"
+    download "${i}.vocab.txt" "${BASE_URL}/${i}.vocab.txt"
+done
