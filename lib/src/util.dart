@@ -29,8 +29,12 @@ int argmax(Vector input) {
   return index;
 }
 
-String sanitizeString(String text) {
-  return text.toLowerCase().replaceAll(RegExp('[^A-Za-z0-9]'), '');
+String sanitizeString(String text, bool stripNonAlphanumeric) {
+  String sanitized = text.toLowerCase();
+  if (stripNonAlphanumeric) {
+    return sanitized.replaceAll(RegExp('[^A-Za-z0-9]'), '');
+  }
+  return sanitized;
 }
 
 Future<String> getModelsDir() async {

@@ -64,9 +64,10 @@ class EmotionClassifier extends Classifier {
       if (index > _sentenceLen) {
         break;
       }
-      var encoded = wordPiece(sanitizeString(tok));
+      var encoded = wordPiece(sanitizeString(tok, false));
+      print('encoded $encoded');
       for (var word in encoded) {
-        var sanitizedWord = sanitizeString(word);
+        var sanitizedWord = sanitizeString(word, false);
         vec[index++] =
             dict.containsKey(sanitizedWord) ? dict[sanitizedWord]! : dict[unk]!;
       }
@@ -80,30 +81,18 @@ class EmotionClassifier extends Classifier {
   }
 
   List<String> wordPiece(String input) {
-    var word = input;
+    var word = input.toLowerCase();
     var tokens = [word];
 
     while (word.isNotEmpty) {
       var i = word.length;
-      var key = word.substring(0, i);
-      var inVocab = dict.containsKey(key);
-      while (i > 0 && !inVocab) {
+      while (i > 0 && !dict.containsKey(word.substring(0, i))) {
         i -= 1;
       }
-
-      if (i == 0) {
-        return [unk];
-      }
-
-      if (!tokens.contains(key)) {
-        tokens.add(key);
-      }
-
-      word = (i + 1 < key.length) ? key.substring(i + 1, key.length) : "";
-
-      if (word.isNotEmpty) {
-        word = '##$word';
-      }
+      if (i == 0) return ["[UNK]"];
+      tokens.add(word.substring(0, i));
+      word = word.substring(i, word.length);
+      if (word.length > 0) word = '##$word';
     }
 
     return tokens;
