@@ -80,11 +80,11 @@ class EmotionClassifier extends Classifier {
     return [vec];
   }
 
-  List<String> wordPiece(String input) {
+  List wordPiece(String input) {
     var word = input.toLowerCase();
-    var tokens = [word];
+    var tokens = [];
 
-    while (word.isNotEmpty) {
+    while (word.length > 0) {
       var i = word.length;
       while (i > 0 && !dict.containsKey(word.substring(0, i))) {
         i -= 1;
