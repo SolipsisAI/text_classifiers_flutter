@@ -81,10 +81,11 @@ class EmotionClassifier extends Classifier {
   }
 
   List wordPiece(String input) {
+    // Based on https://huggingface.co/course/chapter6/6?fw=pt#tokenization-algorithm
     var word = input.toLowerCase();
     var tokens = [];
 
-    while (word.length > 0) {
+    while (word.isNotEmpty) {
       var i = word.length;
       while (i > 0 && !dict.containsKey(word.substring(0, i))) {
         i -= 1;
@@ -92,7 +93,7 @@ class EmotionClassifier extends Classifier {
       if (i == 0) return ["[UNK]"];
       tokens.add(word.substring(0, i));
       word = word.substring(i, word.length);
-      if (word.length > 0) word = '##$word';
+      if (word.isNotEmpty) word = '##$word';
     }
 
     return tokens;
