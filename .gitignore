@@ -34,3 +34,4 @@ build/
 Generated.xcconfig
 flutter_export_environment.sh
 ephemeral
+assets/
