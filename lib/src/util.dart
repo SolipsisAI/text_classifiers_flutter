@@ -29,10 +29,10 @@ int argmax(Vector input) {
   return index;
 }
 
-String sanitizeString(String text, bool stripNonAlphanumeric) {
+String sanitizeString(String text, bool stripPunctuation) {
   String sanitized = text.toLowerCase();
-  if (stripNonAlphanumeric) {
-    return sanitized.replaceAll(RegExp('[^A-Za-z0-9]'), '');
+  if (stripPunctuation) {
+    return sanitized.replaceAll(RegExp("[^A-Za-z0-9']"), '');
   }
   return sanitized;
 }
