@@ -65,7 +65,6 @@ class EmotionClassifier extends Classifier {
         break;
       }
       var encoded = wordPiece(sanitizeString(tok, false));
-      print('encoded $encoded');
       for (var word in encoded) {
         var sanitizedWord = sanitizeString(word, false);
         vec[index++] =
