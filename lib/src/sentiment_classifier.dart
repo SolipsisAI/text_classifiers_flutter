@@ -58,15 +58,12 @@ class SentimentClassifier extends Classifier {
     // For each word in sentence find corresponding index in dict
     for (var tok in toks) {
       tok = sanitizeString(tok, true);
-      print('toke: $tok');
       if (index > sentenceLen) {
         break;
       }
       vec[index++] =
           dict.containsKey(tok) ? dict[tok]!.toDouble() : dict[unk]!.toDouble();
     }
-
-    print('vec $vec');
 
     // returning List<List<double>> as our interpreter input tensor expects the shape, [1,256]
     return [vec];
