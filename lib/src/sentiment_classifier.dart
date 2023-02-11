@@ -1,6 +1,7 @@
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 import 'classifier.dart';
+import 'util.dart';
 
 const defaultVocabFile = 'sentiment_classification.vocab.txt';
 const defaultModelFile = 'sentiment_classification.tflite';
@@ -56,6 +57,7 @@ class SentimentClassifier extends Classifier {
 
     // For each word in sentence find corresponding index in dict
     for (var tok in toks) {
+      tok = sanitizeString(tok, true);
       if (index > sentenceLen) {
         break;
       }
