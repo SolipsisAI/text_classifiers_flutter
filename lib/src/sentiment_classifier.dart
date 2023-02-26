@@ -13,10 +13,13 @@ const String unk = '<UNKNOWN>';
 class SentimentClassifier extends Classifier {
   String vocab;
   String model;
+  int interpreterAddress;
 
   SentimentClassifier(
-      {this.vocab = defaultVocabFile, this.model = defaultModelFile})
-      : super(vocab, model);
+      {this.vocab = defaultVocabFile,
+      this.model = defaultModelFile,
+      this.interpreterAddress = -1})
+      : super(vocab, model, address: interpreterAddress);
 
   Future<int> classify(String rawText) async {
     // tokenizeInputText returns List<List<double>>

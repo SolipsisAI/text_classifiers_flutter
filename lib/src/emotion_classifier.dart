@@ -14,6 +14,7 @@ const String sep = '[SEP]';
 class EmotionClassifier extends Classifier {
   String vocab;
   String model;
+  int interpreterAddress;
 
   final List<String> labels = [
     "sadness",
@@ -25,8 +26,10 @@ class EmotionClassifier extends Classifier {
   ];
 
   EmotionClassifier(
-      {this.model = defaultModelFile, this.vocab = defaultVocabFile})
-      : super(vocab, model);
+      {this.model = defaultModelFile,
+      this.vocab = defaultVocabFile,
+      this.interpreterAddress = -1})
+      : super(vocab, model, address: interpreterAddress);
 
   Future<String> classify(String rawText) async {
     // tokenizeInputText returns List<List<double>>

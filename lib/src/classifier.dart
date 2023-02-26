@@ -9,18 +9,23 @@ import 'util.dart';
 class Classifier {
   late String vocabFile;
   late String modelFile;
+  late int address;
 
   late Map<String, int> dict;
   late Interpreter interpreter;
 
-  Classifier(this.vocabFile, this.modelFile) {
+  Classifier(this.vocabFile, this.modelFile, {this.address = -1}) {
     _loadModel();
     _loadDictionary();
   }
 
   void _loadModel() async {
     // Creating the interpreter using Interpreter.fromAsset
-    interpreter = await Interpreter.fromAsset('models/$modelFile');
+    if (address < 0) {
+      interpreter = await Interpreter.fromAsset('models/$modelFile');
+    } else {
+      interpreter = Interpreter.fromAddress(address);
+    }
     debugPrint('Interpreter $modelFile loaded successfully');
   }
 
