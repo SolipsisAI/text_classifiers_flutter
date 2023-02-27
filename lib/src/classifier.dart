@@ -22,8 +22,10 @@ class Classifier {
   void _loadModel() async {
     // Creating the interpreter using Interpreter.fromAsset
     if (address != null) {
+      debugPrint('Loading from address: $address');
       interpreter = Interpreter.fromAddress(address!);
     } else {
+      debugPrint('Loading from file: $modelFile');
       interpreter = await Interpreter.fromAsset('models/$modelFile');
       address = interpreter.address;
     }
