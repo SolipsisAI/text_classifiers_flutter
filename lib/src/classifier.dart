@@ -27,7 +27,7 @@ class Classifier {
     } else {
       interpreter = Interpreter.fromAddress(address);
     }
-    debugPrint('Interpreter $modelFile loaded successfully');
+    debugPrint('Interpreter $modelFile loaded successfully: $address');
   }
 
   void _loadDictionary() async {
