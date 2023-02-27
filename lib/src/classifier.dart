@@ -7,25 +7,25 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 import 'util.dart';
 
 class Classifier {
-  late String vocabFile;
-  late String modelFile;
-  late int address;
+  late String? vocabFile;
+  late String? modelFile;
+  late int? address;
 
   late Map<String, int> dict;
   late Interpreter interpreter;
 
-  Classifier(this.vocabFile, this.modelFile, {this.address = -1}) {
+  Classifier({this.vocabFile, this.modelFile, this.address}) {
     _loadModel();
     _loadDictionary();
   }
 
   void _loadModel() async {
     // Creating the interpreter using Interpreter.fromAsset
-    if (address < 0) {
+    if (address != null) {
+      interpreter = Interpreter.fromAddress(address!);
+    } else {
       interpreter = await Interpreter.fromAsset('models/$modelFile');
       address = interpreter.address;
-    } else {
-      interpreter = Interpreter.fromAddress(address);
     }
     debugPrint('Interpreter $modelFile loaded successfully: $address');
   }

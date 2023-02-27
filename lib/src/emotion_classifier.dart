@@ -22,10 +22,10 @@ class EmotionClassifier extends Classifier {
   ];
 
   EmotionClassifier({
-    String vocabFile = defaultVocabFile,
-    String modelFile = defaultModelFile,
-    int address = -1,
-  }) : super(vocabFile, modelFile, address: address);
+    String? vocabFile = defaultVocabFile,
+    String? modelFile = defaultModelFile,
+    int? address,
+  }) : super(vocabFile: vocabFile, modelFile: modelFile, address: address);
 
   Future<String> classify(String rawText) async {
     // tokenizeInputText returns List<List<double>>
