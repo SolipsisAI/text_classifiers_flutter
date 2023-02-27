@@ -11,15 +11,11 @@ const String pad = '<PAD>';
 const String unk = '<UNKNOWN>';
 
 class SentimentClassifier extends Classifier {
-  String vocab;
-  String model;
-  int interpreterAddress;
-
-  SentimentClassifier(
-      {this.vocab = defaultVocabFile,
-      this.model = defaultModelFile,
-      this.interpreterAddress = -1})
-      : super(vocab, model, address: interpreterAddress);
+  SentimentClassifier({
+    String vocabFile = defaultVocabFile,
+    String modelFile = defaultModelFile,
+    int address = -1,
+  }) : super(vocabFile, modelFile, address: address);
 
   Future<int> classify(String rawText) async {
     // tokenizeInputText returns List<List<double>>

@@ -23,6 +23,7 @@ class Classifier {
     // Creating the interpreter using Interpreter.fromAsset
     if (address < 0) {
       interpreter = await Interpreter.fromAsset('models/$modelFile');
+      address = interpreter.address;
     } else {
       interpreter = Interpreter.fromAddress(address);
     }
